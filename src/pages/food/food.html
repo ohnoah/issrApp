@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Food
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <ion-grid>
+    <div class='headers'>
+      <ion-row>
+        <ion-col lines col-5>
+          <h2><ion-icon md='md-calendar' ios='ios-calendar-outline' color='primary'></ion-icon></h2>
+            <h3>Weekday</h3></ion-col>
+        <ion-col col-7>
+          <h2><ion-icon md='md-wine' ios='ios-wine' color='primary'></ion-icon></h2>
+          <h3>Dish</h3></ion-col>
+      </ion-row>
+      </div>
+    <div id='spin'>
+      <ion-spinner *ngIf='showSpinner' ios='ios' md='circles'></ion-spinner>
+    </div>
+      
+      <div *ngIf='offlineOnLoad; else onlineOnLoad' class='food'>
+        <ion-row *ngFor = 'let food of offlineArr; let i = index'>
+            <ion-col col-5 class='day'><p>{{weekdays[i]}}</p></ion-col>
+            <ion-col col-7 class='dish'><p>{{food}}</p></ion-col>
+        </ion-row>
+      </div>
+      <ng-template #onlineOnLoad>
+        <div class='food'>
+        <ion-row *ngFor='let dish of dishes; let i = index'>
+          <ion-col col-5 class='day'><p>{{weekdays[i]}}</p></ion-col>
+          <ion-col col-7 class='dish'><p>{{dish}}</p></ion-col>
+        </ion-row>
+        </div>
+      </ng-template>
+    </ion-grid>
+  
+
+</ion-content>
+
+      
+
